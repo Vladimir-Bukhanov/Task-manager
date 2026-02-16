@@ -8,7 +8,8 @@ interface ITaskList {
 }
 
 export default function TaskList ({tasks, toggleChange, onDelete}: ITaskList) {
-	<div>
+	return (
+		<div>
 		{tasks.map(task => (
 			<TaskItem 
 				key={task.id}
@@ -18,4 +19,5 @@ export default function TaskList ({tasks, toggleChange, onDelete}: ITaskList) {
 			/>
 		))}
 	</div>
+	)
 }
