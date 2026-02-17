@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TaskList from './components/TaskList'
 import type { ITask } from './types/task'
 import TaskForm from './components/TaskForm'
@@ -18,7 +18,22 @@ const initialTasks: ITask[] = [
 
 export default function App() {
 
-  const [tasks, setTasks] = useState<ITask[]>(initialTasks)
+  const [tasks, setTasks] = useState<ITask[]>(() => {
+    
+    const saved = localStorage.getItem('tasks')
+
+    if (saved) {
+      const parsed = JSON.parse(saved)
+      return parsed.length > 0 ? parsed : initialTasks
+    }
+
+    return initialTasks
+
+  })
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   const onDelete = (id: number) => {
     setTasks(prev => prev.filter(task => (
