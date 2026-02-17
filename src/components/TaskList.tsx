@@ -8,6 +8,11 @@ interface ITaskList {
 }
 
 export default function TaskList ({tasks, toggleChange, onDelete}: ITaskList) {
+
+	if (tasks.length === 0) {
+		return <p>You have no tasks</p>
+	}
+
 	return (
 		<>
 			{tasks.map(task => (
