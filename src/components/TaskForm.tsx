@@ -24,6 +24,7 @@ export default function TaskForm({addTask}: ITaskForm) {
 			}
 
 			setError('')
+			setTitle('')
 			addTask(title)
 
 		}
@@ -34,16 +35,19 @@ export default function TaskForm({addTask}: ITaskForm) {
 			onSubmit={handleSubmit}
 		>
 			<input 
-				type="text" 
+				type="text"
+				placeholder='Enter your task...'
+				className='w-full text-black bg-white outline-0 rounded mb-3 px-3' 
 				value={title}
 				onChange={handleChange}	
 			/>
 			<button 
 				type="submit"
+				className='border rounded cursor-pointer mb-3 px-3 hover:bg-blue-400 duration-200'
 			>
 				Add Task
 			</button>
-			{error && <p>{error}</p>}
+			{error && <p className='text-red-500 mt-0 mb-3'>{error}</p>}
 		</form>
 	)
 }
