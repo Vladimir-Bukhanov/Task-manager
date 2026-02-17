@@ -9,15 +9,15 @@ interface ITaskList {
 
 export default function TaskList ({tasks, toggleChange, onDelete}: ITaskList) {
 	return (
-		<div>
-		{tasks.map(task => (
-			<TaskItem 
-				key={task.id}
-				item={task}
-				onChange={toggleChange}
-				onDelete={onDelete}
-			/>
-		))}
-	</div>
+		<>
+			{tasks.map(task => (
+				<TaskItem 
+					key={task.id}
+					item={task}
+					onChange={toggleChange}
+					onDelete={onDelete}
+				/>
+			))}
+		</>
 	)
 }
