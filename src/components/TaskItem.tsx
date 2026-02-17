@@ -1,5 +1,6 @@
 import { FaRegTrashAlt } from 'react-icons/fa'
 import type { ITask } from '../types/task'
+import { memo } from 'react'
 
 interface ITaskItem {
 	item: ITask
@@ -7,7 +8,7 @@ interface ITaskItem {
 	onDelete: (id: number) => void
 }
 
-export default function TaskItem ({item, onChange, onDelete}: ITaskItem) {
+function TaskItemComponent ({item, onChange, onDelete}: ITaskItem) {
 
 
 	return (
@@ -29,3 +30,5 @@ export default function TaskItem ({item, onChange, onDelete}: ITaskItem) {
 		</div>
 	)
 }
+
+export const TaskItem = memo(TaskItemComponent)
