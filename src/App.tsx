@@ -73,6 +73,12 @@ export default function App() {
 
   })
 
+  const onEdit = (editedTitle: string, id: number) => {
+    setTasks(prev => prev.map(task => (
+      task.id === id ? {...task, title: editedTitle} : task
+    )))
+  }
+
   return (
     <div className='w-100 bg-gray-500 rounded p-5 mt-20 mx-auto'>
       <h1 className='text-center mb-3 text-xl'>
@@ -85,6 +91,7 @@ export default function App() {
         tasks={filteredTasks}
         onDelete={onDelete}
         toggleChange={toggleCompleted}
+        onEdit={onEdit}
       />
       <FilterButtons 
         onFilterChange={setFilter}
