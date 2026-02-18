@@ -83,6 +83,7 @@ export default function App() {
     setTasks(prev => prev.filter(task => !task.completed))
   }
 
+  const activeTasks = tasks.filter(task => !task.completed).length
 
   return (
     <div className='w-100 bg-gray-500 rounded p-5 mt-20 mx-auto'>
@@ -108,6 +109,7 @@ export default function App() {
       >
         Clear completed
       </button>
+      <p>You have {activeTasks} active tasks</p>
     </div>
   )
 }
