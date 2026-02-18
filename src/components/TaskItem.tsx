@@ -21,27 +21,32 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 	}
 
 	return (
-		<div className='flex items-center mb-3'>
+		<div className='flex items-center mb-3 relative'>
 			
 			{isEditing ? 
 				(
-					<>
+					<div className='flex w-full justify-between'>
 						<input 
 							type="text"
+							className='outline-0 bg-white text-black pl-3 w-[58%]'
 							value={editText}
 							onChange={e => setEditText(e.target.value)}
 						/>
-						<button
-							onClick={editTitle}
-						>
-							Save
-						</button>
-						<button
-							onClick={() => setIsEditing(false)}
-						>
-							Cancel
-						</button>
-					</>
+						<div>
+							<button
+								className='border w-16 mr-3 cursor-pointer hover:bg-green-400 ease duration-200'
+								onClick={editTitle}
+							>
+								Save
+							</button>
+							<button
+								className='border w-16 cursor-pointer hover:bg-blue-400 ease duration-200'
+								onClick={() => setIsEditing(false)}
+							>
+								Cancel
+							</button>
+						</div>
+					</div>
 				) : 
 				(
 				<>
