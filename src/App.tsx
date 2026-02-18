@@ -103,6 +103,7 @@ export default function App() {
         currentBtn={filter}
       />
       <button
+        className='cursor-pointer border px-2 hover:bg-gray-400 ease duration-200 mb-3'
         onClick={clear}
       >
         Clear completed

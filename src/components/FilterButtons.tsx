@@ -9,7 +9,7 @@ export default function FilterButtons({onFilterChange, currentBtn}: IFilterButto
 
 
 	return (
-		<div className='flex'>
+		<div className='flex mb-5'>
 			{(["all", "active", "completed"] as FilterType[]).map(filterBtn => (
 				<button
 					key={filterBtn}
