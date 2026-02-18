@@ -79,6 +79,11 @@ export default function App() {
     )))
   }
 
+  const clear = () => {
+    setTasks(prev => prev.filter(task => !task.completed))
+  }
+
+
   return (
     <div className='w-100 bg-gray-500 rounded p-5 mt-20 mx-auto'>
       <h1 className='text-center mb-3 text-xl'>
@@ -97,6 +102,11 @@ export default function App() {
         onFilterChange={setFilter}
         currentBtn={filter}
       />
+      <button
+        onClick={clear}
+      >
+        Clear completed
+      </button>
     </div>
   )
 }
