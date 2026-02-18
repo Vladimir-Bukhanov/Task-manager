@@ -1,5 +1,6 @@
 import type { ITask } from '../types/task'
-import TaskItem from './TaskItem'
+import { TaskItem } from './TaskItem'
+
 
 interface ITaskList {
 	tasks: ITask[]
