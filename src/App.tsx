@@ -4,6 +4,8 @@ import type { ITask } from './types/task'
 import TaskForm from './components/TaskForm'
 import FilterButtons from './components/FilterButtons'
 import type { FilterType } from './types/filter'
+import type { SortType } from './types/sort'
+import SortedButtons from './components/SortedButtons'
 
 const initialTasks: ITask[] = [
   {
@@ -36,8 +38,9 @@ export default function App() {
   const [filter, setFilter] = useState<FilterType>(() => {
     
     return (localStorage.getItem('filter') as FilterType || "all")
-
   })
+
+  const [sort, setSort] = useState<SortType>("date")
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -87,6 +90,14 @@ export default function App() {
     )))
   }
 
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+    
+    if (sort === "alphabet") {
+      return a.title.localeCompare(b.title)
+    }
+    return b.id - a.id
+  })
+
   const clear = () => {
     setTasks(prev => prev.filter(task => !task.completed))
   }
@@ -102,7 +113,7 @@ export default function App() {
         addTask={addTask}
       />
       <TaskList
-        tasks={filteredTasks}
+        tasks={sortedTasks}
         onDelete={onDelete}
         toggleChange={toggleCompleted}
         onEdit={onEdit}
@@ -110,6 +121,9 @@ export default function App() {
       <FilterButtons 
         onFilterChange={setFilter}
         currentBtn={filter}
+      />
+      <SortedButtons 
+        onSort={setSort}
       />
       <button
         className='cursor-pointer border px-2 hover:bg-gray-400 ease duration-200 mb-3'
