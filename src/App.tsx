@@ -33,11 +33,19 @@ export default function App() {
 
   })
 
-  const [filter, setFilter] = useState<FilterType>("all")
+  const [filter, setFilter] = useState<FilterType>(() => {
+    
+    return (localStorage.getItem('filter') as FilterType || "all")
+
+  })
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
+
+  useEffect(() => {
+    localStorage.setItem('filter', filter)
+  }, [filter])
 
   const onDelete = (id: number) => {
     setTasks(prev => prev.filter(task => (
