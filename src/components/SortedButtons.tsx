@@ -14,9 +14,9 @@ export default function SortedButtons({onSort, currentSort}: ISort) {
 			<button
 				key={sortItem}
 				onClick={() => onSort(sortItem)}
-				className={`border mr-3 w-26 cursor-pointer hover:border-orange-400 ease duration-200 ${currentSort === sortItem ? 'bg-orange-400 border-orange-400' : ''}`}
+				className={`border mr-3 w-38 cursor-pointer hover:border-orange-400 ease duration-200 ${currentSort === sortItem ? 'bg-orange-400 border-orange-400' : ''}`}
 			>
-				{sortItem}
+				Sorted by {sortItem}
 			</button>
 			)}
 		</div>

@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion'
 import type { ITask } from '../types/task'
 import { TaskItem } from './TaskItem'
 
@@ -16,16 +17,24 @@ export default function TaskList ({tasks, toggleChange, onDelete, onEdit}: ITask
 	}
 
 	return (
-		<>
+		<AnimatePresence>
 			{tasks.map(task => (
-				<TaskItem 
+				<motion.li
 					key={task.id}
-					item={task}
-					onChange={toggleChange}
-					onDelete={onDelete}
-					onEdit={onEdit}
-				/>
+					className='list-none'
+					initial={{ opacity:0, x: 10 }}
+					animate={{ opacity:1, x: 0 }}
+					exit={{ opacity:0, y:10 }}
+					transition={{ duration: 0.2 }}
+				>
+					<TaskItem 
+						item={task}
+						onChange={toggleChange}
+						onDelete={onDelete}
+						onEdit={onEdit}
+					/>
+				</motion.li>
 			))}
-		</>
+		</AnimatePresence>
 	)
 }
