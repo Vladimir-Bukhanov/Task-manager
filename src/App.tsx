@@ -124,9 +124,10 @@ export default function App() {
       />
       <SortedButtons 
         onSort={setSort}
+        currentSort={sort}
       />
       <button
-        className='cursor-pointer border px-2 hover:bg-gray-400 ease duration-200 mb-3'
+        className='cursor-pointer border px-2 hover:bg-gray-600 ease duration-200 mb-3 hover:border-gray-200'
         onClick={clear}
       >
         Clear completed
