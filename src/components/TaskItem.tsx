@@ -1,6 +1,7 @@
 import { FaRegTrashAlt } from 'react-icons/fa'
 import type { ITask } from '../types/task'
-import { memo, useState } from 'react'
+import { memo, useContext, useState } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 
 interface ITaskItem {
 	item: ITask
@@ -14,6 +15,8 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 	const [isEditing, setIsEditing] = useState<boolean>(false)
 
 	const [editText, setEditText] = useState<string>(item.title)
+
+	const {theme} = useContext(ThemeContext)
 
 	const editTitle = () => {
 		onEdit(editText, item.id)
@@ -34,7 +37,9 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 						/>
 						<div>
 							<button
-								className='border w-16 mr-3 cursor-pointer hover:bg-green-400 ease duration-200'
+								className={`border w-16 mr-3 cursor-pointer ease duration-200
+								${theme === 'light' ? 'hover:bg-green-400' : 'hover:bg-amber-300'}	
+								`}
 								onClick={editTitle}
 							>
 								Save
@@ -51,13 +56,19 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 				(
 				<>
 					<input
-						className='cursor-pointer' 
+						className='cursor-pointer scale-120' 
 						type="checkbox" 
 						checked={item.completed}
 						onChange={() => onChange(item.id)}
 					/>
 					<span 
-						className={`mx-3 cursor-pointer ${item.completed ? 'line-through text-white/50' : ''}`}
+						className={`mx-3 cursor-pointer 
+							${item.completed  ? 'line-through' : ''}
+							${theme === "light" && item.completed ? 'text-white/50' : ''}
+							${theme === "light" && !item.completed ? 'text-white' : ''}
+							${theme === "dark" && item.completed ? 'text-black/60' : ''}
+							${theme === "dark" && !item.completed ? 'text-black' : ''}
+							`}
 						onClick={() => setIsEditing(true)}
 					>
 						{item.title}

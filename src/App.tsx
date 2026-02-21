@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import TaskList from './components/TaskList'
 import type { ITask } from './types/task'
 import TaskForm from './components/TaskForm'
@@ -7,6 +7,7 @@ import type { FilterType } from './types/filter'
 import type { SortType } from './types/sort'
 import SortedButtons from './components/SortedButtons'
 import type { Theme } from './types/theme'
+import { ThemeContext } from './context/ThemeContext'
 
 const initialTasks: ITask[] = [
   {
@@ -43,9 +44,7 @@ export default function App() {
 
   const [sort, setSort] = useState<SortType>("date")
 
-  const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem("theme") as Theme || "light")
-  })
+  const {theme, toggleTheme} = useContext(ThemeContext)
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -54,14 +53,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('filter', filter)
   }, [filter])
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme)
-  }, [theme])
-
-  useEffect(() => {
-    document.body.setAttribute("data-theme", theme)
-  }, [theme])
 
   const onDelete = (id: number) => {
     setTasks(prev => prev.filter(task => (
@@ -119,7 +110,7 @@ export default function App() {
 
   return (
     <div className={`w-100 rounded p-5 mt-20 mx-auto
-    ${theme === "light" ? "bg-gray-500" : "bg-green-500"}`}>
+    ${theme === "light" ? "bg-gray-600" : "bg-green-500"}`}>
       <h1 className='text-center mb-3 text-xl'>
         Task Manager
       </h1>
@@ -141,15 +132,15 @@ export default function App() {
         currentSort={sort}
       />
       <button
-        className='cursor-pointer border px-2 hover:bg-gray-600 ease duration-200 mb-3 hover:border-gray-200'
+        className={`cursor-pointer border block px-2 ease duration-200 mb-3 ${theme === "light" ? "hover:bg-gray-800 hover:border-gray-200" : "hover:bg-yellow-400 hover:border-yellow-400"}`}
         onClick={clear}
       >
         Clear completed
       </button>
       <button
-        onClick={() => 
-          setTheme(prev => prev === "light" ? "dark" : "light")
-        }
+        className={`mb-3 border px-3 cursor-pointer duration-300 ease
+          ${theme === "light" ? "hover:bg-blue-700" : "hover:bg-pink-400 hover:border-pink-400"}`}
+        onClick={toggleTheme}
       >
         Toggle theme
       </button>
