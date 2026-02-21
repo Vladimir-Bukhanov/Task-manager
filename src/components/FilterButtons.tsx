@@ -12,11 +12,11 @@ export default function FilterButtons({onFilterChange, currentBtn}: IFilterButto
 	const {theme} = useContext(ThemeContext)
 
 	return (
-		<div className='flex mb-5'>
+		<div className='sm:flex sm:mb-5'>
 			{(["all", "active", "completed"] as FilterType[]).map(filterBtn => (
 				<button
 					key={filterBtn}
-					className={`w-100 border mr-3 cursor-pointer ease duration-200 
+					className={`px-3 mb-3 sm:mb-0 sm:px-0 sm:w-100 border mr-3 cursor-pointer ease duration-200 
 					${currentBtn === filterBtn && theme === "light" ? 'bg-blue-700 border-blue-400' : ''}
 					${currentBtn === filterBtn && theme === "dark" ? 'bg-white/60 border-white' : ''} 
 					${theme === "light" ? "hover:border-blue-400" : "hover:border-white"}

@@ -6,7 +6,6 @@ import FilterButtons from './components/FilterButtons'
 import type { FilterType } from './types/filter'
 import type { SortType } from './types/sort'
 import SortedButtons from './components/SortedButtons'
-import type { Theme } from './types/theme'
 import { ThemeContext } from './context/ThemeContext'
 
 const initialTasks: ITask[] = [
@@ -109,7 +108,7 @@ export default function App() {
   const activeTasks = tasks.filter(task => !task.completed).length
 
   return (
-    <div className={`w-100 rounded p-5 mt-20 mx-auto
+    <div className={`max-w-110 w-[90%] rounded p-5 mt-20 mx-auto
     ${theme === "light" ? "bg-gray-600" : "bg-green-500"}`}>
       <h1 className='text-center mb-3 text-xl'>
         Task Manager
@@ -138,7 +137,7 @@ export default function App() {
         Clear completed
       </button>
       <button
-        className={`mb-3 border px-3 cursor-pointer duration-300 ease
+        className={`mb-3 border px-3 cursor-pointer duration-300 ease w-full
           ${theme === "light" ? "hover:bg-blue-700" : "hover:bg-pink-400 hover:border-pink-400"}`}
         onClick={toggleTheme}
       >
