@@ -6,6 +6,7 @@ import FilterButtons from './components/FilterButtons'
 import type { FilterType } from './types/filter'
 import type { SortType } from './types/sort'
 import SortedButtons from './components/SortedButtons'
+import type { Theme } from './types/theme'
 
 const initialTasks: ITask[] = [
   {
@@ -42,6 +43,10 @@ export default function App() {
 
   const [sort, setSort] = useState<SortType>("date")
 
+  const [theme, setTheme] = useState<Theme>(() => {
+    return (localStorage.getItem("theme") as Theme || "light")
+  })
+
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }, [tasks])
@@ -49,6 +54,14 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('filter', filter)
   }, [filter])
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme)
+  }, [theme])
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme)
+  }, [theme])
 
   const onDelete = (id: number) => {
     setTasks(prev => prev.filter(task => (
@@ -105,7 +118,8 @@ export default function App() {
   const activeTasks = tasks.filter(task => !task.completed).length
 
   return (
-    <div className='w-100 bg-gray-500 rounded p-5 mt-20 mx-auto'>
+    <div className={`w-100 rounded p-5 mt-20 mx-auto
+    ${theme === "light" ? "bg-gray-500" : "bg-green-500"}`}>
       <h1 className='text-center mb-3 text-xl'>
         Task Manager
       </h1>
@@ -131,6 +145,13 @@ export default function App() {
         onClick={clear}
       >
         Clear completed
+      </button>
+      <button
+        onClick={() => 
+          setTheme(prev => prev === "light" ? "dark" : "light")
+        }
+      >
+        Toggle theme
       </button>
       <p>You have {activeTasks} active tasks</p>
     </div>
