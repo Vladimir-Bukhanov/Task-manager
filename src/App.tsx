@@ -108,7 +108,7 @@ export default function App() {
   const activeTasks = tasks.filter(task => !task.completed).length
 
   return (
-    <div className={`max-w-110 w-[90%] rounded p-5 mt-20 mx-auto
+    <div className={`max-w-110 w-full rounded sm:p-5 py-5 px-2 mt-20 mx-auto
     ${theme === "light" ? "bg-gray-600" : "bg-green-500"}`}>
       <h1 className='text-center mb-3 text-xl'>
         Task Manager

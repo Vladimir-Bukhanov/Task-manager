@@ -17,10 +17,11 @@ export default function TaskList ({tasks, toggleChange, onDelete, onEdit}: ITask
 	}
 
 	return (
-		<AnimatePresence>
+		<AnimatePresence mode='popLayout'>
 			{tasks.map(task => (
 				<motion.li
 					key={task.id}
+					layout
 					className='list-none'
 					initial={{ opacity:0, x: 10 }}
 					animate={{ opacity:1, x: 0 }}

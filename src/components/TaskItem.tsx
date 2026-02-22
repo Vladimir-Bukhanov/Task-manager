@@ -1,7 +1,7 @@
-import { FaRegTrashAlt } from 'react-icons/fa'
-import type { ITask } from '../types/task'
 import { memo, useContext, useState } from 'react'
+import { FaRegTrashAlt } from 'react-icons/fa'
 import { ThemeContext } from '../context/ThemeContext'
+import type { ITask } from '../types/task'
 
 interface ITaskItem {
 	item: ITask
@@ -23,21 +23,26 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 		setIsEditing(false)
 	}
 
+	const onCancel = () => {
+		setIsEditing(false)
+		setEditText(item.title)
+	}
+
 	return (
 		<div className='flex items-center mb-3 relative'>
 			
 			{isEditing ? 
 				(
-					<div className='flex w-full justify-between'>
+					<div className='flex w-full'>
 						<input 
 							type="text"
-							className='outline-0 bg-white text-black pl-3 w-[58%]'
+							className='outline-0 bg-white text-black pl-3 mr-2 w-[56%]'
 							value={editText}
 							onChange={e => setEditText(e.target.value)}
 						/>
 						<div>
 							<button
-								className={`border w-16 mr-3 cursor-pointer ease duration-200
+								className={`border px-1 sm:px-0 sm:w-16 mr-2 sm:mr-3 cursor-pointer ease duration-200
 								${theme === 'light' ? 'hover:bg-green-400' : 'hover:bg-amber-300'}	
 								`}
 								onClick={editTitle}
@@ -45,8 +50,8 @@ function TaskItemComponent ({item, onChange, onDelete, onEdit}: ITaskItem) {
 								Save
 							</button>
 							<button
-								className='border w-16 cursor-pointer hover:bg-blue-400 ease duration-200'
-								onClick={() => setIsEditing(false)}
+								className='border px-1 sm:px-0 sm:w-16 cursor-pointer hover:bg-blue-400 ease duration-200'
+								onClick={onCancel}
 							>
 								Cancel
 							</button>
